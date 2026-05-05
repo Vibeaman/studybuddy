@@ -1,9 +1,50 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
+// Feature data
+const features = [
+  {
+    icon: '🎓',
+    title: 'Personal AI Tutor',
+    desc: 'Get instant, personalized help with any subject, any time you need it.'
+  },
+  {
+    icon: '📝',
+    title: 'Smart Flashcard Creator',
+    desc: 'Transform any content into effective flashcards for optimal retention.'
+  },
+  {
+    icon: '📋',
+    title: 'Comprehensive Notes',
+    desc: 'Transform any content into well-organized, easy-to-review notes.'
+  },
+  {
+    icon: '✨',
+    title: 'Adaptive Quiz Builder',
+    desc: 'Test your understanding with AI-generated practice questions.'
+  }
+]
+
+const learnFeatures = [
+  {
+    icon: '💡',
+    title: 'Smart Teaching Methods',
+    desc: 'Transform complex topics into clear, digestible content with AI-powered tools.'
+  },
+  {
+    icon: '📈',
+    title: 'Adapts to Your Expertise',
+    desc: 'Great for students looking to ace their exams, or experts keeping up with research.'
+  },
+  {
+    icon: '📴',
+    title: 'Works Offline',
+    desc: 'Download once, learn forever. No internet required after initial setup.'
+  }
+]
+
 export default function Home() {
   const [isOnline, setIsOnline] = useState(navigator.onLine)
-  const [modelReady, setModelReady] = useState(false)
 
   useEffect(() => {
     const handleOnline = () => setIsOnline(true)
@@ -12,11 +53,6 @@ export default function Home() {
     window.addEventListener('online', handleOnline)
     window.addEventListener('offline', handleOffline)
     
-    // Check if model is cached
-    if ('caches' in window) {
-      caches.has('gemma-model').then(setModelReady)
-    }
-    
     return () => {
       window.removeEventListener('online', handleOnline)
       window.removeEventListener('offline', handleOffline)
@@ -24,68 +60,137 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Status bar */}
-      <div className={`px-4 py-2 text-center text-sm font-medium ${
-        isOnline ? 'bg-green-500/20 text-green-400' : 'bg-amber-500/20 text-amber-400'
+    <div className="min-h-screen bg-white">
+      {/* Status indicator */}
+      <div className={`fixed top-4 right-4 z-50 px-3 py-1.5 rounded-full text-xs font-medium flex items-center gap-2 ${
+        isOnline ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'
       }`}>
-        {isOnline ? '🟢 Online' : '🟡 Offline Mode'}
-        {modelReady && ' • AI Model Ready'}
+        <span className={`w-2 h-2 rounded-full ${isOnline ? 'bg-green-500' : 'bg-amber-500'}`}></span>
+        {isOnline ? 'Online' : 'Offline'}
       </div>
 
-      {/* Hero */}
-      <main className="flex-1 flex flex-col items-center justify-center px-6 py-12">
-        <div className="text-center max-w-2xl mx-auto">
-          {/* Logo */}
-          <div className="mb-8">
-            <div className="w-24 h-24 mx-auto bg-gradient-to-br from-primary-400 to-primary-600 rounded-3xl flex items-center justify-center text-5xl shadow-2xl shadow-primary-500/30">
-              📚
+      {/* Hero Section */}
+      <section className="relative overflow-hidden px-6 py-16 md:py-24">
+        {/* Blue blob background */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[500px] bg-blue-200 rounded-full blur-3xl opacity-60 -z-10"></div>
+        
+        <div className="max-w-4xl mx-auto text-center">
+          {/* Hero Illustration */}
+          <div className="relative w-72 h-72 mx-auto mb-8">
+            <div className="absolute inset-0 bg-blue-200 rounded-full"></div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-8xl float-animation">📚</div>
             </div>
+            {/* Floating icons */}
+            <div className="absolute top-4 left-4 text-2xl float-animation" style={{animationDelay: '0.5s'}}>🔢</div>
+            <div className="absolute top-8 right-8 text-2xl float-animation" style={{animationDelay: '1s'}}>⚗️</div>
+            <div className="absolute bottom-12 left-8 text-2xl float-animation" style={{animationDelay: '1.5s'}}>🌍</div>
+            <div className="absolute bottom-8 right-4 text-2xl float-animation" style={{animationDelay: '0.3s'}}>💻</div>
+            <div className="absolute top-1/2 left-0 text-xl float-animation" style={{animationDelay: '0.8s'}}>π</div>
+            <div className="absolute top-1/3 right-0 text-xl float-animation" style={{animationDelay: '1.2s'}}>√x</div>
           </div>
 
-          {/* Title */}
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">
-            StudyBuddy
+          <p className="section-label">Experience the future of education</p>
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            AI-Powered Learning
           </h1>
-          
-          <p className="text-xl text-white/60 mb-8">
-            Your personal AI tutor that works <span className="text-primary-400 font-semibold">anywhere</span>, 
-            even without internet.
+          <p className="section-desc max-w-2xl mx-auto mb-8">
+            AI learning tools will help you learn faster, remember longer, and understand better.
+            <span className="text-blue-500 font-semibold"> Works offline</span> - no internet required.
           </p>
 
-          {/* Features */}
-          <div className="grid grid-cols-3 gap-4 mb-10">
-            <div className="glass rounded-2xl p-4">
-              <div className="text-2xl mb-2">🧠</div>
-              <div className="text-sm text-white/80">Powered by Gemma 4</div>
-            </div>
-            <div className="glass rounded-2xl p-4">
-              <div className="text-2xl mb-2">📴</div>
-              <div className="text-sm text-white/80">Works Offline</div>
-            </div>
-            <div className="glass rounded-2xl p-4">
-              <div className="text-2xl mb-2">🎯</div>
-              <div className="text-sm text-white/80">Adaptive Learning</div>
-            </div>
-          </div>
-
-          {/* CTA */}
-          <Link to="/subjects" className="btn-primary inline-block text-lg px-8 py-4">
+          <Link to="/study/general" className="btn-primary inline-block text-lg">
             Start Learning →
           </Link>
-
-          {/* Subtitle */}
-          <p className="mt-6 text-white/40 text-sm">
+          
+          <p className="mt-4 text-gray-500 text-sm">
             No account needed. Free forever.
           </p>
         </div>
-      </main>
+      </section>
+
+      {/* Features Grid */}
+      <section className="px-6 py-16 bg-gray-50">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-6">
+            {features.map((feature, i) => (
+              <div key={i} className="flex gap-4 p-4">
+                <div className="feature-icon shrink-0">
+                  <span className="text-xl">{feature.icon}</span>
+                </div>
+                <div>
+                  <h3 className="font-bold text-lg text-gray-900 mb-1">{feature.title}</h3>
+                  <p className="text-gray-600">{feature.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Second Hero Section */}
+      <section className="relative overflow-hidden px-6 py-16">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] bg-blue-200 rounded-full blur-3xl opacity-50 -z-10"></div>
+        
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="w-64 h-64 mx-auto mb-8 relative">
+            <div className="absolute inset-0 bg-blue-200 rounded-full"></div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-7xl float-animation">🧑‍🎓</div>
+            </div>
+            {/* Science icons */}
+            <div className="absolute top-2 right-8 text-xl float-animation">🧬</div>
+            <div className="absolute bottom-8 left-4 text-xl float-animation" style={{animationDelay: '0.5s'}}>⚛️</div>
+            <div className="absolute top-1/3 left-2 text-xl float-animation" style={{animationDelay: '1s'}}>🪐</div>
+          </div>
+
+          <p className="section-label">StudyBuddy can help you</p>
+          <h2 className="section-title">Learn Faster and Better</h2>
+          <p className="section-desc max-w-xl mx-auto">
+            Master any field, from quantum physics to world history, with personalized guidance.
+          </p>
+        </div>
+      </section>
+
+      {/* Learn Features */}
+      <section className="px-6 py-16">
+        <div className="max-w-4xl mx-auto">
+          {learnFeatures.map((feature, i) => (
+            <div key={i} className="flex gap-4 p-4 mb-4">
+              <div className="feature-icon shrink-0">
+                <span className="text-xl">{feature.icon}</span>
+              </div>
+              <div>
+                <h3 className="font-bold text-lg text-gray-900 mb-1">{feature.title}</h3>
+                <p className="text-gray-600">{feature.desc}</p>
+                <Link to="/study/general" className="text-blue-500 font-medium text-sm hover:underline mt-2 inline-block">
+                  Learn more →
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="px-6 py-16 bg-blue-400">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold text-white mb-2">Ready to dive in?</h2>
+          <p className="text-blue-100 text-xl mb-6">Try it out for free!</p>
+          <Link to="/study/general" className="btn-secondary inline-block">
+            Get started
+          </Link>
+        </div>
+      </section>
 
       {/* Footer */}
-      <footer className="text-center py-6 text-white/30 text-sm">
-        Built for Gemma 4 Good Hackathon 2026
-        <br />
-        <span className="text-white/50">by VIBÆMAN</span>
+      <footer className="px-6 py-8 text-center">
+        <p className="text-gray-500 text-sm">
+          Study Buddy AI — Copyright 2026
+        </p>
+        <p className="text-gray-400 text-xs mt-2">
+          Built for Gemma 4 Good Hackathon by <a href="https://x.com/0xvibeaman" className="text-blue-500 hover:underline">VIBÆMAN</a>
+        </p>
       </footer>
     </div>
   )

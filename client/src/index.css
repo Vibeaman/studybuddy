@@ -1,43 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  --blue-primary: #3B82F6;
+  --blue-light: #DBEAFE;
+  --blue-blob: #BFDBFE;
 }
 
 body {
-  @apply bg-slate-900 text-white min-h-screen;
+  @apply bg-white text-gray-900 min-h-screen;
 }
 
-.glass {
-  @apply bg-white/5 backdrop-blur-xl border border-white/10;
-}
-
+/* Light theme styles */
 .btn-primary {
-  @apply bg-primary-500 hover:bg-primary-600 text-white font-medium py-3 px-6 rounded-xl transition-all duration-200 active:scale-95;
+  @apply bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-full transition-all duration-200 active:scale-95 shadow-lg shadow-blue-500/30;
 }
 
 .btn-secondary {
-  @apply bg-white/10 hover:bg-white/20 text-white font-medium py-3 px-6 rounded-xl transition-all duration-200 active:scale-95;
+  @apply bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-200 active:scale-95;
 }
 
-.input {
-  @apply w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all;
+.feature-icon {
+  @apply w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-500;
 }
 
-/* Chat bubbles */
-.bubble-user {
-  @apply bg-primary-500 text-white rounded-2xl rounded-br-md px-4 py-3 max-w-[85%] ml-auto;
+.section-label {
+  @apply text-blue-500 font-semibold text-sm uppercase tracking-wide mb-2;
 }
 
-.bubble-ai {
-  @apply bg-white/10 text-white rounded-2xl rounded-bl-md px-4 py-3 max-w-[85%];
+.section-title {
+  @apply text-3xl md:text-4xl font-bold text-gray-900 mb-4;
 }
 
-/* Loading animation */
+.section-desc {
+  @apply text-gray-600 text-lg leading-relaxed;
+}
+
+/* Blue blob background */
+.blob-bg {
+  @apply relative;
+}
+
+.blob-bg::before {
+  content: '';
+  @apply absolute inset-0 -z-10;
+  background: radial-gradient(ellipse at center, #BFDBFE 0%, transparent 70%);
+}
+
+/* Chat styles - iMessage inspired with glassmorphism */
+.chat-container {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-size: cover;
+}
+
+.chat-bubble-user {
+  @apply bg-blue-500 text-white rounded-2xl rounded-br-sm px-4 py-3 max-w-[80%] ml-auto shadow-lg;
+}
+
+.chat-bubble-ai {
+  @apply backdrop-blur-xl bg-white/80 text-gray-900 rounded-2xl rounded-bl-sm px-4 py-3 max-w-[80%] shadow-lg border border-white/50;
+}
+
+.chat-input-container {
+  @apply backdrop-blur-xl bg-white/70 border-t border-white/30;
+}
+
+.chat-input {
+  @apply w-full bg-white/90 border border-gray-200 rounded-full px-5 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all;
+}
+
+/* Glass card */
+.glass-card {
+  @apply backdrop-blur-xl bg-white/80 rounded-2xl p-6 shadow-xl border border-white/50;
+}
+
+/* Typing indicator */
 .typing-indicator span {
-  @apply inline-block w-2 h-2 bg-white/60 rounded-full mx-0.5;
+  @apply inline-block w-2 h-2 bg-gray-400 rounded-full mx-0.5;
   animation: typing 1.4s infinite ease-in-out;
 }
 
@@ -51,10 +94,10 @@ body {
 
 @keyframes typing {
   0%, 60%, 100% { transform: translateY(0); }
-  30% { transform: translateY(-8px); }
+  30% { transform: translateY(-6px); }
 }
 
-/* Scrollbar */
+/* Smooth scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -64,5 +107,15 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-white/20 rounded-full;
+  @apply bg-gray-300 rounded-full;
+}
+
+/* Animation for hero */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
 }
