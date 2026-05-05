@@ -50,7 +50,7 @@ export async function chatWithAPI(messages, subject = 'general') {
       'X-Title': 'StudyBuddy'
     },
     body: JSON.stringify({
-      model: 'google/gemma-2-9b-it:free',
+      model: 'google/gemma-4-31b-it:free',
       messages: [
         { role: 'system', content: systemPrompt },
         ...messages
