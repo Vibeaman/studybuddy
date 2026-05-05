@@ -33,6 +33,14 @@ export function getMode() {
 export async function chatWithAPI(messages, subject = 'general') {
   const systemPrompt = SYSTEM_PROMPT.replace('{subject}', subject)
   
+  // Debug: check if API key is loaded
+  if (!API_KEY) {
+    console.error('OpenRouter API key not configured!')
+    throw new Error('API key not configured. Please add VITE_OPENROUTER_KEY environment variable.')
+  }
+  
+  console.log('Sending request to OpenRouter...')
+  
   const response = await fetch(API_URL, {
     method: 'POST',
     headers: {
@@ -53,10 +61,13 @@ export async function chatWithAPI(messages, subject = 'general') {
   })
 
   if (!response.ok) {
-    throw new Error('API request failed')
+    const errorText = await response.text()
+    console.error('API Error:', response.status, errorText)
+    throw new Error(`API request failed: ${response.status} - ${errorText}`)
   }
 
   const data = await response.json()
+  console.log('Response received:', data)
   return data.choices[0].message.content
 }
 
