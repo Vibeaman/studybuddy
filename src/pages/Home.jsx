@@ -31,17 +31,20 @@ const learnFeatures = [
   {
     icon: '💡',
     title: 'Smart Teaching Methods',
-    desc: 'Transform complex topics into clear, digestible content with AI-powered tools.'
+    desc: 'Transform complex topics into clear, digestible content with AI-powered tools.',
+    slug: 'smart-teaching'
   },
   {
     icon: '📈',
     title: 'Adapts to Your Expertise',
-    desc: 'Great for students looking to ace their exams, or experts keeping up with research.'
+    desc: 'Great for students looking to ace their exams, or experts keeping up with research.',
+    slug: 'adaptive-learning'
   },
   {
     icon: '📴',
     title: 'Works Offline',
-    desc: 'Download once, learn forever. No internet required after initial setup.'
+    desc: 'Download once, learn forever. No internet required after initial setup.',
+    slug: 'offline-mode'
   }
 ]
 
@@ -144,7 +147,7 @@ export default function Home() {
               <div>
                 <h3 className="font-bold text-lg text-gray-900 mb-1">{feature.title}</h3>
                 <p className="text-gray-600">{feature.desc}</p>
-                <Link to="/study/general" className="text-blue-500 font-medium text-sm hover:underline mt-2 inline-block">
+                <Link to={`/learn/${feature.slug}`} className="text-blue-500 font-medium text-sm hover:underline mt-2 inline-block">
                   Learn more →
                 </Link>
               </div>
