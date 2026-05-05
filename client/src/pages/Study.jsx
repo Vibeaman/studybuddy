@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { chat, getMode, initWebLLM } from '../services/ai'
+import VideoSuggestions from '../components/VideoSuggestions'
 
 const subjectInfo = {
   math: { name: 'Mathematics', emoji: '🔢', bg: 'from-blue-500 to-indigo-600' },
@@ -19,6 +20,7 @@ export default function Study() {
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [modelStatus, setModelStatus] = useState('')
+  const [lastQuery, setLastQuery] = useState('') // Track last user query for video suggestions
   const messagesEndRef = useRef(null)
   const inputRef = useRef(null)
 
@@ -36,6 +38,7 @@ export default function Study() {
       content: `Hey! 👋 I'm StudyBuddy, your personal AI tutor. I'm here to help you learn ${info.name === 'StudyBuddy' ? 'anything you want' : info.name}!\n\nAsk me any question, and I'll guide you through it step by step. What would you like to learn today?`
     }
     setMessages([welcome])
+    setLastQuery('')
   }, [subject])
 
   // Initialize WebLLM if in offline mode
@@ -57,10 +60,12 @@ export default function Study() {
     e.preventDefault()
     if (!input.trim() || loading) return
 
-    const userMessage = { role: 'user', content: input.trim() }
+    const userQuery = input.trim()
+    const userMessage = { role: 'user', content: userQuery }
     setMessages(prev => [...prev, userMessage])
     setInput('')
     setLoading(true)
+    setLastQuery(userQuery) // Store query for video suggestions
 
     try {
       const chatHistory = [...messages, userMessage].map(m => ({
@@ -70,12 +75,13 @@ export default function Study() {
       
       const response = await chat(chatHistory, subject)
       
-      setMessages(prev => [...prev, { role: 'assistant', content: response }])
+      setMessages(prev => [...prev, { role: 'assistant', content: response, showVideos: true }])
     } catch (error) {
       console.error('Chat error:', error)
       setMessages(prev => [...prev, { 
         role: 'assistant', 
-        content: "Sorry, I couldn't process that. Please try again!" 
+        content: "Sorry, I couldn't process that. Please try again!",
+        showVideos: false
       }])
     } finally {
       setLoading(false)
@@ -113,10 +119,19 @@ export default function Study() {
       {/* Messages */}
       <main className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.map((msg, i) => (
-          <div key={i} className={msg.role === 'user' ? 'flex justify-end' : 'flex justify-start'}>
-            <div className={msg.role === 'user' ? 'chat-bubble-user' : 'chat-bubble-ai'}>
-              <p className="whitespace-pre-wrap">{msg.content}</p>
+          <div key={i}>
+            <div className={msg.role === 'user' ? 'flex justify-end' : 'flex justify-start'}>
+              <div className={msg.role === 'user' ? 'chat-bubble-user' : 'chat-bubble-ai'}>
+                <p className="whitespace-pre-wrap">{msg.content}</p>
+              </div>
             </div>
+            
+            {/* Show video suggestions after AI response if relevant */}
+            {msg.role === 'assistant' && msg.showVideos && lastQuery && (
+              <div className="mt-3 max-w-[85%]">
+                <VideoSuggestions query={lastQuery} />
+              </div>
+            )}
           </div>
         ))}
         
