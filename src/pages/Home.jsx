@@ -92,12 +92,20 @@ export default function Home() {
             <span className="text-blue-500 font-semibold"> Works offline</span> - no internet required.
           </p>
 
-          <Link to="/study/general" className="btn-primary inline-block text-lg">
-            Start Learning →
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link to="/study/general" className="btn-primary inline-block text-lg">
+              Start Learning →
+            </Link>
+            <Link to="/study/general?mode=offline" className="inline-block text-lg px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg font-medium hover:border-gray-400 hover:bg-gray-50 transition-colors">
+              📴 Use Offline
+            </Link>
+          </div>
           
           <p className="mt-4 text-gray-500 text-sm">
             No account needed. Free forever.
+          </p>
+          <p className="mt-1 text-gray-400 text-xs">
+            Offline mode downloads a 1.5GB AI model to your device
           </p>
         </div>
       </section>
@@ -161,9 +169,14 @@ export default function Home() {
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-white mb-2">Ready to dive in?</h2>
           <p className="text-blue-100 text-xl mb-6">Try it out for free!</p>
-          <Link to="/study/general" className="btn-secondary inline-block">
-            Get started
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Link to="/study/general" className="btn-secondary inline-block">
+              Get started
+            </Link>
+            <Link to="/study/general?mode=offline" className="inline-block px-6 py-3 border-2 border-white/50 text-white rounded-lg font-medium hover:border-white hover:bg-white/10 transition-colors">
+              📴 Use Offline Mode
+            </Link>
+          </div>
         </div>
       </section>
 
