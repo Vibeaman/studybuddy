@@ -8,6 +8,34 @@ const ORGANIC_CHEM_TUTOR = {
   description: 'One of the best STEM tutors on YouTube - covers chemistry, physics, math, and more'
 }
 
+const FREECODECAMP = {
+  name: 'freeCodeCamp',
+  channelUrl: 'https://www.youtube.com/@freecodecamp',
+  avatar: '💻',
+  description: 'Free coding tutorials and full courses for beginners to advanced'
+}
+
+const TRAVERSY_MEDIA = {
+  name: 'Traversy Media',
+  channelUrl: 'https://www.youtube.com/@TraversyMedia',
+  avatar: '🌐',
+  description: 'Practical web development tutorials and crash courses'
+}
+
+const FIRESHIP = {
+  name: 'Fireship',
+  channelUrl: 'https://www.youtube.com/@Fireship',
+  avatar: '🔥',
+  description: 'Fast-paced modern web dev tutorials in 100 seconds or less'
+}
+
+const COREY_SCHAFER = {
+  name: 'Corey Schafer',
+  channelUrl: 'https://www.youtube.com/@coreyms',
+  avatar: '🐍',
+  description: 'In-depth Python tutorials and programming concepts'
+}
+
 // Curated video database - specific videos for common topics
 export const videoDatabase = {
   // PHYSICS
@@ -252,6 +280,124 @@ export const videoDatabase = {
     videoId: 'yfR36PMWegg',
     tutor: ORGANIC_CHEM_TUTOR,
     topics: ['photosynthesis', 'chlorophyll', 'light reactions', 'calvin cycle']
+  },
+
+  // PROGRAMMING - PYTHON
+  'python': {
+    title: 'Python Tutorial for Beginners - Full Course',
+    videoId: '_uQrJ0TkZlc',
+    tutor: FREECODECAMP,
+    topics: ['python', 'programming', 'coding', 'beginner']
+  },
+  'python basics': {
+    title: 'Python Tutorial - Python for Beginners',
+    videoId: 'kqtD5dpn9C8',
+    tutor: FREECODECAMP,
+    topics: ['python', 'variables', 'loops', 'functions']
+  },
+  'python oop': {
+    title: 'Python OOP Tutorial',
+    videoId: 'ZDa-Z5JzLYM',
+    tutor: COREY_SCHAFER,
+    topics: ['python', 'oop', 'classes', 'objects', 'inheritance']
+  },
+
+  // PROGRAMMING - JAVASCRIPT
+  'javascript': {
+    title: 'JavaScript Tutorial for Beginners - Full Course',
+    videoId: 'PkZNo7MFNFg',
+    tutor: FREECODECAMP,
+    topics: ['javascript', 'js', 'web development', 'programming']
+  },
+  'javascript crash course': {
+    title: 'JavaScript Crash Course For Beginners',
+    videoId: 'hdI2bqOjy3c',
+    tutor: TRAVERSY_MEDIA,
+    topics: ['javascript', 'js', 'dom', 'es6']
+  },
+  'react': {
+    title: 'React JS Crash Course',
+    videoId: 'w7ejDZ8SWv8',
+    tutor: TRAVERSY_MEDIA,
+    topics: ['react', 'reactjs', 'frontend', 'components', 'jsx']
+  },
+  'nodejs': {
+    title: 'Node.js Tutorial for Beginners',
+    videoId: 'TlB_eWDSMt4',
+    tutor: FREECODECAMP,
+    topics: ['nodejs', 'node', 'backend', 'server', 'express']
+  },
+
+  // PROGRAMMING - WEB DEV
+  'html css': {
+    title: 'HTML & CSS Full Course - Beginner to Pro',
+    videoId: 'G3e-cpL7ofc',
+    tutor: FREECODECAMP,
+    topics: ['html', 'css', 'web design', 'frontend']
+  },
+  'html': {
+    title: 'HTML Tutorial for Beginners',
+    videoId: 'qz0aGYrrlhU',
+    tutor: FREECODECAMP,
+    topics: ['html', 'web', 'tags', 'elements']
+  },
+  'css': {
+    title: 'CSS Tutorial - Zero to Hero',
+    videoId: '1Rs2ND1ryYc',
+    tutor: FREECODECAMP,
+    topics: ['css', 'styling', 'flexbox', 'grid', 'responsive']
+  },
+  'tailwind': {
+    title: 'Tailwind CSS Crash Course',
+    videoId: 'UBOj6rqRUME',
+    tutor: TRAVERSY_MEDIA,
+    topics: ['tailwind', 'css', 'utility', 'styling']
+  },
+
+  // PROGRAMMING - OTHER LANGUAGES
+  'java': {
+    title: 'Java Tutorial for Beginners',
+    videoId: 'eIrMbAQSU34',
+    tutor: FREECODECAMP,
+    topics: ['java', 'programming', 'oop', 'jvm']
+  },
+  'c programming': {
+    title: 'C Programming Tutorial for Beginners',
+    videoId: 'KJgsSFOSQv0',
+    tutor: FREECODECAMP,
+    topics: ['c', 'programming', 'pointers', 'memory']
+  },
+  'cpp': {
+    title: 'C++ Tutorial for Beginners - Full Course',
+    videoId: 'vLnPwxZdW4Y',
+    tutor: FREECODECAMP,
+    topics: ['c++', 'cpp', 'programming', 'oop']
+  },
+
+  // PROGRAMMING - CONCEPTS
+  'data structures': {
+    title: 'Data Structures Easy to Advanced',
+    videoId: 'RBSGKlAvoiM',
+    tutor: FREECODECAMP,
+    topics: ['data structures', 'arrays', 'linked lists', 'trees', 'algorithms']
+  },
+  'algorithms': {
+    title: 'Algorithms and Data Structures Tutorial',
+    videoId: '8hly31xKli0',
+    tutor: FREECODECAMP,
+    topics: ['algorithms', 'sorting', 'searching', 'big o']
+  },
+  'git': {
+    title: 'Git and GitHub for Beginners - Crash Course',
+    videoId: 'RGOj5yH7evk',
+    tutor: FREECODECAMP,
+    topics: ['git', 'github', 'version control', 'commits', 'branches']
+  },
+  'sql': {
+    title: 'SQL Tutorial - Full Database Course',
+    videoId: 'HXV3zeQKqGY',
+    tutor: FREECODECAMP,
+    topics: ['sql', 'database', 'mysql', 'queries', 'tables']
   }
 }
 
