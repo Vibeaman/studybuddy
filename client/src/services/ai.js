@@ -1,9 +1,9 @@
 // AI Service - handles both API mode and WebLLM mode
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://openrouter.ai/api/v1/chat/completions'
-const API_KEY = import.meta.env.VITE_OPENROUTER_KEY || ''
+// Use our serverless API endpoint (keeps API key safe on server)
+const API_URL = '/api/chat'
 
-// System prompt for the tutor
+// System prompt for the tutor (used by WebLLM mode)
 const SYSTEM_PROMPT = `You are StudyBuddy, a friendly and patient AI tutor powered by Gemma 4. Your goal is to help students learn effectively.
 
 Guidelines:
@@ -29,46 +29,32 @@ export function getMode() {
   return params.get('mode') || 'api'
 }
 
-// API mode - uses OpenRouter
+// API mode - uses our serverless endpoint
 export async function chatWithAPI(messages, subject = 'general') {
-  const systemPrompt = SYSTEM_PROMPT.replace('{subject}', subject)
+  console.log('Sending request to API...')
   
-  // Debug: check if API key is loaded
-  if (!API_KEY) {
-    console.error('OpenRouter API key not configured!')
-    throw new Error('API key not configured. Please add VITE_OPENROUTER_KEY environment variable.')
-  }
-  
-  console.log('Sending request to OpenRouter...')
-  
-  const response = await fetch(API_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${API_KEY}`,
-      'HTTP-Referer': window.location.origin,
-      'X-Title': 'StudyBuddy'
-    },
-    body: JSON.stringify({
-      model: 'google/gemma-4-31b-it:free',
-      messages: [
-        { role: 'system', content: systemPrompt },
-        ...messages
-      ],
-      temperature: 0.7,
-      max_tokens: 1024
+  try {
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ messages, subject })
     })
-  })
 
-  if (!response.ok) {
-    const errorText = await response.text()
-    console.error('API Error:', response.status, errorText)
-    throw new Error(`API request failed: ${response.status} - ${errorText}`)
+    const data = await response.json()
+    console.log('Response:', data)
+    
+    if (!response.ok) {
+      console.error('API Error:', response.status, data)
+      throw new Error(data.error || `API request failed: ${response.status}`)
+    }
+
+    return data.content
+  } catch (error) {
+    console.error('Chat error:', error)
+    throw error
   }
-
-  const data = await response.json()
-  console.log('Response received:', data)
-  return data.choices[0].message.content
 }
 
 // WebLLM mode - runs Gemma locally (for judges with beefy machines)
