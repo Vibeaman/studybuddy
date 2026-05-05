@@ -40,7 +40,7 @@ Current subject: ${subject || 'general'}`
         'X-Title': 'StudyBuddy'
       },
       body: JSON.stringify({
-        model: 'google/gemma-4-31b-it:free',
+        model: 'nvidia/nemotron-3-nano-30b-a3b:free',
         messages: [
           { role: 'system', content: systemPrompt },
           ...messages
