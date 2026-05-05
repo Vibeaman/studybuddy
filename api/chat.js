@@ -1,7 +1,6 @@
 // Vercel Serverless Function - proxies requests to OpenRouter
-// This keeps the API key safe on the server side
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
@@ -48,7 +47,7 @@ Current subject: ${subject || 'general'}`
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${API_KEY}`,
-        'HTTP-Referer': 'https://studybuddy.vercel.app',
+        'HTTP-Referer': 'https://studybuddy-zeta.vercel.app',
         'X-Title': 'StudyBuddy'
       },
       body: JSON.stringify({
