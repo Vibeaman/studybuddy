@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import HeroIllustration from '../components/HeroIllustration'
+import SecondIllustration from '../components/SecondIllustration'
 
 // Feature data
 const features = [
@@ -76,19 +78,7 @@ export default function Home() {
         
         <div className="max-w-4xl mx-auto text-center">
           {/* Hero Illustration */}
-          <div className="relative w-72 h-72 mx-auto mb-8">
-            <div className="absolute inset-0 bg-blue-200 rounded-full"></div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-8xl float-animation">📚</div>
-            </div>
-            {/* Floating icons */}
-            <div className="absolute top-4 left-4 text-2xl float-animation" style={{animationDelay: '0.5s'}}>🔢</div>
-            <div className="absolute top-8 right-8 text-2xl float-animation" style={{animationDelay: '1s'}}>⚗️</div>
-            <div className="absolute bottom-12 left-8 text-2xl float-animation" style={{animationDelay: '1.5s'}}>🌍</div>
-            <div className="absolute bottom-8 right-4 text-2xl float-animation" style={{animationDelay: '0.3s'}}>💻</div>
-            <div className="absolute top-1/2 left-0 text-xl float-animation" style={{animationDelay: '0.8s'}}>π</div>
-            <div className="absolute top-1/3 right-0 text-xl float-animation" style={{animationDelay: '1.2s'}}>√x</div>
-          </div>
+          <HeroIllustration />
 
           <p className="section-label">Experience the future of education</p>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
@@ -133,16 +123,7 @@ export default function Home() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] bg-blue-200 rounded-full blur-3xl opacity-50 -z-10"></div>
         
         <div className="max-w-4xl mx-auto text-center">
-          <div className="w-64 h-64 mx-auto mb-8 relative">
-            <div className="absolute inset-0 bg-blue-200 rounded-full"></div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-7xl float-animation">🧑‍🎓</div>
-            </div>
-            {/* Science icons */}
-            <div className="absolute top-2 right-8 text-xl float-animation">🧬</div>
-            <div className="absolute bottom-8 left-4 text-xl float-animation" style={{animationDelay: '0.5s'}}>⚛️</div>
-            <div className="absolute top-1/3 left-2 text-xl float-animation" style={{animationDelay: '1s'}}>🪐</div>
-          </div>
+          <SecondIllustration />
 
           <p className="section-label">StudyBuddy can help you</p>
           <h2 className="section-title">Learn Faster and Better</h2>
